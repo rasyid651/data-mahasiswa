@@ -1,38 +1,50 @@
 <?php
 
-include 'layout/header.php';
 $title = "Daftar Mahasiswa";
+include 'layout/header.php';
 
-$data_mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa DESC");
+// ambil data mahasiswa
+$id_mahasiswa =  (int)$_GET['id_mahasiswa'];
+
+// menampilkan data mahasiswa
+$mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa = $id_mahasiswa")[0];
 ?>
 
-
 <div class="container mt-5">
-    <h1>Data Mahasiswa</h1>
+    <h1>Data <?= $mahasiswa['nama'] ?></h1>
     <hr>
-    <a href="tambah-mahasiswa.php" class="btn btn-primary mb-1">Tambah</a>
-    <table id="example" class="table table-bordered table-striped">
-        <tbody>
-            <?php $no = 1; ?>
-            <?php foreach ($data_mahasiswa as $mahasiswa) : ?>
-                <tr>
-                    <td><?= $no++; ?></td>
-                    <td><?= $mahasiswa["nama"] ?></td>
-                    <td><?= $mahasiswa["parodi"] ?></td>
-                    <td><?= $mahasiswa["jk"] ?></td>
-                    <td><?= $mahasiswa["telepon"] ?></td>
-                    <td><?= $mahasiswa["email"] ?></td>
+    <table class="table table-bordered table-striped">
 
-                    <td width="15%" class="text-center">
-                        <a href="detail-mahasiswa.php?id_mahasiswa=<?= $mahasiswa['id_mahasiswa']; ?>" class="btn btn-secondary btn-sm">Detail</a>
-                        <a href="ubah-mahasiswa.php?id_mahasiswa=<?= $mahasiswa['id_mahasiswa']; ?>" class="btn btn-success btn-sm">Ubah</a>
-                        <a href="-mahasiswa.php?id_mahasiswa=<?= $mahasiswa['id_mahasiswa']; ?>" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Yakin ingin menghapus barang?');">Hapus</a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
+        <tr>
+            <td>Nama</td>
+            <td><?= $mahasiswa['nama'] ?></td>
+        </tr>
+        <tr>
+            <td>Parodi</td>
+            <td><?= $mahasiswa['parodi'] ?></td>
+        </tr>
+        <tr>
+            <td>Jenis Kelamin</td>
+            <td><?= $mahasiswa['jk'] ?></td>
+        </tr>
+        <tr>
+            <td>Telepon</td>
+            <td><?= $mahasiswa['telepon'] ?></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><?= $mahasiswa['email'] ?></td>
+        </tr>
+        <tr>
+            <td width="50%">Foto</td>
+            <td>
+                <a href="assets/download.jpg">
+                    <img src="assets/download.jpg" alt="foto" width="50%">
+                </a>
+            </td>
+        </tr>
     </table>
+    <a href="mahasiswa.php" class="btn btn-secondary btn-sm" style="float: right;">Kembali</a>
 </div>
 
 <?php include 'layout/footer.php' ?>

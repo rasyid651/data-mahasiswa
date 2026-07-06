@@ -1,7 +1,7 @@
 <?php
 
-include 'layout/header.php';
 $title = "Daftar Mahasiswa";
+include 'layout/header.php';
 
 $data_mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa DESC");
 ?>

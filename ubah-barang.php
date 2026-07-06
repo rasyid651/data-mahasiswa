@@ -1,5 +1,7 @@
 <?php 
+$title = "Ubah Barang";
 include 'layout/header.php';
+
 
 // ambil data melalui id_barang
 $id_barang = (int)$_GET['id_barang'];

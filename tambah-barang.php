@@ -1,4 +1,5 @@
 <?php 
+$title = "Tambah Barang";
 include 'layout/header.php';
 
 if (isset($_POST['tambah'])) {

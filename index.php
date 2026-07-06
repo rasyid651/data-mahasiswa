@@ -1,5 +1,7 @@
 <?php 
 include 'layout/header.php';
+$title = "Daftar Barang";
+
 ?>
 
 <div class="container mt-5">

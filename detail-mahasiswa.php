@@ -7,7 +7,7 @@ include 'layout/header.php';
 $id_mahasiswa =  (int)$_GET['id_mahasiswa'];
 
 // menampilkan data mahasiswa
-$mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa = $id_mahasiswa")[0];
+$mahasiswa = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa")[0];
 ?>
 
 <div class="container mt-5">
@@ -20,8 +20,8 @@ $mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa = $id_mahasis
             <td><?= $mahasiswa['nama'] ?></td>
         </tr>
         <tr>
-            <td>Parodi</td>
-            <td><?= $mahasiswa['parodi'] ?></td>
+            <td>Prodi</td>
+            <td><?= $mahasiswa['prodi'] ?></td>
         </tr>
         <tr>
             <td>Jenis Kelamin</td>
@@ -38,8 +38,8 @@ $mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa = $id_mahasis
         <tr>
             <td width="50%">Foto</td>
             <td>
-                <a href="assets/download.jpg">
-                    <img src="assets/download.jpg" alt="foto" width="50%">
+                <a href="assets/<?= $mahasiswa['foto'] ?>">
+                    <img src="assets/<?= $mahasiswa['foto'] ?>" alt="foto" width="50%">
                 </a>
             </td>
         </tr>

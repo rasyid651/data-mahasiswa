@@ -1,4 +1,4 @@
-<?php 
+<?php
 $title = "Tambah Barang";
 include 'layout/header.php';
 
@@ -8,7 +8,7 @@ if (isset($_POST['tambah'])) {
         alert('Data berhasil ditambahkan!');
         document.location.href = 'index.php';
         </script>";
-    }else {
+    } else {
         echo "<script>
         alert('Data gagal ditambahkan!');
         document.location.href = 'index.php';
@@ -31,12 +31,15 @@ if (isset($_POST['tambah'])) {
             <label for="nama" class="form-label">Jumlah</label>
             <input type="number" class="form-control" name="jumlah" id="jumlah" placeholder="Jumlah Barang" required>
         </div>
-        
+
         <div class="mb-3">
             <label for="nama" class="form-label">Harga Barang</label>
             <input type="number" class="form-control" name="harga" id="harga" placeholder="Harga Barang" required>
         </div>
-        <input type="submit" class="btn btn-primary" style="float: right;" value="Simpan" name="tambah">
+
+        <button type="submit" name="tambah" class="btn btn-primary" style="float: right;">
+            <i class="fa fa-plus" style="font-size:14px"></i> Tambah
+        </button>
     </form>
 </div>
 

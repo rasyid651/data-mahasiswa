@@ -176,8 +176,43 @@ function create_akun($post){
     $password = strip_tags($post['password']);
     $level = strip_tags($post['level']);
 
+    // enkripsi pw
+    $password = password_hash($password,PASSWORD_DEFAULT);
+
     $query = "INSERT INTO akun VALUES(null, '$nama','$username','$email','$password','$level')";
 
     mysqli_query($koneksi,$query);
+    return mysqli_affected_rows($koneksi);
+}
+
+function delete_akun($id_akun)
+{
+    global $koneksi;
+
+    // query hapus
+    $query = "DELETE FROM akun WHERE id_akun = $id_akun";
+
+    mysqli_query($koneksi, $query);
+    return mysqli_affected_rows($koneksi);
+}
+
+// fungsi menupdate data
+function update_akun($post)
+{
+    global $koneksi;
+
+    $id_akun = strip_tags($post['id_akun']);
+    $nama = strip_tags($post['nama']);
+    $username = strip_tags($post['username']);
+    $email = strip_tags($post['email']);
+    $password = strip_tags($post['password']);
+    $level = strip_tags($post['level']);
+
+    // query update
+    $query = "UPDATE akun SET nama ='$nama', username = '$username', email = '$email', 
+    password = '$password', level = '$level'
+    WHERE id_akun = $id_akun";
+
+    mysqli_query($koneksi, $query);
     return mysqli_affected_rows($koneksi);
 }

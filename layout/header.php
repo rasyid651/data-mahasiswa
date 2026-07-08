@@ -1,6 +1,5 @@
 <?php
 include 'config/app.php';
-
 ?>
 
 <!doctype html>
@@ -26,7 +25,7 @@ include 'config/app.php';
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">CRUD</a>
+        <a class="navbar-brand" href="index.php">CRUD</a>
 
         <button class="navbar-toggler" type="button"
             data-bs-toggle="collapse"
@@ -40,9 +39,11 @@ include 'config/app.php';
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <?php if ($_SESSION['level'] == 1 or $_SESSION['level'] == 2) : ?>
                 <li class="nav-item">
                     <a class="nav-link active" href="index.php">Barang</a>
                 </li>
+                <?php endif; ?>
 
                 <li class="nav-item">
                     <a class="nav-link" href="mahasiswa.php">Mahasiswa</a>
@@ -51,7 +52,14 @@ include 'config/app.php';
                 <li class="nav-item">
                     <a class="nav-link" href="crud-modal.php">Modal</a>
                 </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">Keluar</a>
+                </li>
             </ul>
+        </div>
+        <div>
+            <a class="navbar-brand" href="#" style="font-size: 18px; font-weight: 500;"><?= $_SESSION['nama']; ?></a>
         </div>
     </div>
 </nav>

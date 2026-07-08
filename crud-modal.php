@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['login'])){
+    echo "<script>
+    alert('Login dulu dong');
+    document.location.href = 'login.php';
+    </script>";
+}
+
 $title = "Daftar Akun";
 include 'layout/header.php';
 
@@ -60,9 +69,9 @@ if (isset($_POST['edit']) > 0) {
                     <td><?= $akun['nama'] ?></td>
                     <td><?= $akun['username'] ?></td>
                     <td><?= $akun['email'] ?></td>
-                    <td><?= $akun['password'] ?></td>
+                    <td>Password Dienkripsi</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-primary mb-1" data-bs-toggle="modal" data-bs-target="#modalUbah<?= $akun['id_akun']; ?>">
+                        <button type="button" class="btn btn-success mb-1" data-bs-toggle="modal" data-bs-target="#modalUbah<?= $akun['id_akun']; ?>">
                             Ubah
                         </button><button type="button" class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#modalHapus<?= $akun['id_akun']; ?>">
                             Hapus
@@ -103,7 +112,7 @@ if (isset($_POST['edit']) > 0) {
                     <div class="mb-3">
                         <label for="passowrd">Password</label>
                         <input type="password" name="password" id="password" class="form-control" required
-                            minlength="4">
+                            minlength="3">
                     </div>
 
                     <div class="mb-3">
@@ -111,7 +120,8 @@ if (isset($_POST['edit']) > 0) {
                         <select name="level" id="level" class="form-control" required>
                             <option value="">-- Pilih level --</option>
                             <option value="1">Admin</option>
-                            <option value="2">Operator</option>
+                            <option value="2">Operator Barang</option>
+                            <option value="3">Operator Mahasiswa</option>
                         </select>
                     </div>
 
@@ -179,7 +189,7 @@ if (isset($_POST['edit']) > 0) {
                         <div class="mb-3">
                             <label for="passowrd">Password</label>
                             <input type="password" name="password" id="password" class="form-control" required
-                                value="<?= $akun['password']; ?>" minlength="4">
+                                value="<?= $akun['password']; ?>" minlength="3">
                         </div>
 
                         <div class="mb-3">

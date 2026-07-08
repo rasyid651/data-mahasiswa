@@ -1,4 +1,22 @@
 <?php 
+session_start();
+
+// membatasi halaman sebelum login
+if (!isset($_SESSION['login'])){
+    echo "<script>
+    alert('Login dulu dong');
+    document.location.href = 'login.php';
+    </script>";
+}
+
+// membatasi halaman sesuai user
+if ($_SESSION['level'] != 1 or $_SESSION['level'] != 2){
+    echo "<script>
+    alert('Perhatian anda tidak punya hak akses!');
+    document.location.href = 'crud-modal.php';
+    </script>";
+}
+
 $title = "Daftar Barang";
 include 'layout/header.php';
 
@@ -8,7 +26,7 @@ $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
 <div class="container mt-5">
         <h1><i class='fas fa-clipboard-list' style='font-size:36px'></i> Data Barang</h1>
         <hr>
-        <a href="tambah-barang.php" class="btn btn-primary mb-1"><i class="fa fa-plus"></i> Tambah</a>
+        <a href="tambah-barang.php" class="btn btn-primary mb-1"><i class="fa-solid fa-circle-plus"></i> Tambah</a>
         <table id="example" class="table table-bordered table-striped">
             <thead>
                 <tr>

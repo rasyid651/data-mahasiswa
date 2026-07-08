@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['login'])) {
+    echo "<script>
+    alert('Login dulu dong');
+    document.location.href = 'login.php';
+    </script>";
+}
+
 include 'config/app.php';
 
 // mengambil id barang
@@ -15,5 +24,3 @@ if (delete_barang($id_barang) > 0) {
         document.location.href = 'index.php';
         </script>";
 }
-
-?>

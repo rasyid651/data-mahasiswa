@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['login'])) {
+    echo "<script>
+    alert('Login dulu dong');
+    document.location.href = 'login.php';
+    </script>";
+}
 
 $title = "Daftar Mahasiswa";
 include 'layout/header.php';
@@ -11,7 +19,7 @@ $data_mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa DESC");
     <h1> <i class="fa fa-list-ul" style="font-size: 36px;"></i> Data Mahasiswa</h1>
     <hr>
     <a href="tambah-mahasiswa.php" class="btn btn-primary mb-1"> <i class="fa fa-plus"></i> Tambah</a>
-    
+
     <table id="example" class="table table-bordered table-striped">
         <thead>
             <tr>

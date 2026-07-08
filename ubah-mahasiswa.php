@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+if (!isset($_SESSION['login'])) {
+    echo "<script>
+    alert('Login dulu dong');
+    document.location.href = 'login.php';
+    </script>";
+}
+
 $title = "Edit Mahasiswa";
 include 'layout/header.php';
 
@@ -83,14 +92,14 @@ $mahasiswa = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa"
 </div>
 
 <script>
-    function previewImg(){
+    function previewImg() {
         const foto = document.querySelector('#foto');
         const imgPreview = document.querySelector('.img-preview');
 
         const fileFoto = new FileReader();
         fileFoto.readAsDataURL(foto.files[0]);
 
-        fileFoto.onload = function(e){
+        fileFoto.onload = function(e) {
             imgPreview.src = e.target.result;
         }
     }

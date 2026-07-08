@@ -5,6 +5,10 @@
 <script src="https://cdn.datatables.net/2.3.8/js/dataTables.js"></script>
 <script src="https://cdn.datatables.net/2.3.8/js/dataTables.bootstrap5.js"></script>
 
+<!-- load font awesome cdn -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
 <script>
     new DataTable('#example');
 </script>

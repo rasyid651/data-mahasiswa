@@ -8,6 +8,14 @@ if (!isset($_SESSION['login'])) {
     </script>";
 }
 
+// membatasi halaman sesuai user
+if ($_SESSION['level'] != 1 and $_SESSION['level'] != 3){
+    echo "<script>
+    alert('Perhatian anda tidak punya hak akses!');
+    document.location.href = 'crud-modal.php';
+    </script>";
+}
+
 $title = "Daftar Mahasiswa";
 include 'layout/header.php';
 
@@ -19,6 +27,7 @@ $data_mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa DESC");
     <h1> <i class="fa fa-list-ul" style="font-size: 36px;"></i> Data Mahasiswa</h1>
     <hr>
     <a href="tambah-mahasiswa.php" class="btn btn-primary mb-1"> <i class="fa fa-plus"></i> Tambah</a>
+    <a href="download-excel-mahasiswa.php" class="btn btn-success mb-1"><i class="fa-solid fa-file-excel"></i> Download Excel</a>
 
     <table id="example" class="table table-bordered table-striped">
         <thead>

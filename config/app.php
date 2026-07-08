@@ -1,4 +1,4 @@
 <?php
-include 'config/koneksi.php';
-include 'config/controller.php';
+include 'koneksi.php';
+include 'controller.php';
 ?>

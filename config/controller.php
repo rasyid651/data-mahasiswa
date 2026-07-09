@@ -119,7 +119,7 @@ function upload_file()
     $namaFileBaru = uniqid() . '.' . $extensiFile;
 
     // pindahkan ke folder baru
-    move_uploaded_file($tmpName, 'assets/img' . $namaFileBaru);
+    move_uploaded_file($tmpName, 'assets/img/' . $namaFileBaru);
     return $namaFileBaru;
 }
 
@@ -142,8 +142,8 @@ function update_mahasiswa($post)
     } else {
         $foto = upload_file();
         // hapus foto lama
-        if (file_exists("assets/img" . $fotoLama)) {
-            unlink("assets/img" . $fotoLama);
+        if (file_exists("assets/img/" . $fotoLama)) {
+            unlink("assets/img/" . $fotoLama);
         }
     }
 
@@ -161,7 +161,7 @@ function delete_mahasiswa($id_mahasiswa)
 
     // ambil foto yang sesuai data yang dipilih
     $foto = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa")[0];
-    unlink("assets/img" . $foto['foto']);
+    unlink("assets/img/" . $foto['foto']);
 
     // query hapys
     $query = "DELETE FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa";

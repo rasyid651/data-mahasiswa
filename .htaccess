@@ -1,0 +1,19 @@
+# menyembukikan list file/direktori
+Options -Indexes
+
+# menyembukikan signature/tanda server
+ServerSignature Off
+
+# menghilangkan ekstensi file di url
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.*)$ $1.php [L]
+</IfModule>
+
+# redirect/mengalinkan ke urt lain
+Redirect /crud-php/mahasiswa.php https://mubatekno.com/
+
+# agar reloadnya lebih cepat 
+    

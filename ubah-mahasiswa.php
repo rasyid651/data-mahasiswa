@@ -77,7 +77,7 @@ $mahasiswa = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa"
 
         <div class="mb-3">
             <label for="telepon" class="form-label">Alamat</label>
-            <textarea name="alamat" id="alamat"><?php $mahasiswa['alamat']; ?></textarea>
+            <textarea name="alamat" id="alamat"><?= $mahasiswa['alamat']; ?></textarea>
         </div>
 
         <div class="mb-3">
@@ -88,11 +88,12 @@ $mahasiswa = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa"
 
         <div class="mb-3">
             <label for="foto" class="form-label">Foto</label>
-            <input type="file" class="form-control" name="foto" id="foto">
+            <input type="file" class="form-control" name="foto" id="foto" onChange="previewImg()">
 
-            <img src="assets/<?= $mahasiswa['foto'] ?>" class="img-thumbail img-preview mt-2" alt="" width="100px">
+            <img src="assets/img/<?= $mahasiswa['foto'] ?>" class="img-thumbnail img-preview mt-2" alt="" width="100px">
         </div>
         <input type="submit" class="btn btn-primary" style="float: right;" value="Simpan" name="update">
+        <a href="mahasiswa.php" class="btn btn-secondary me-2" style="float: right;">Kembali</a>
     </form>
 </div>
 

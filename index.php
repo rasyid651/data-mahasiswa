@@ -34,6 +34,7 @@ $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
                     <th>Nama</th>
                     <th>Jumlah</th>
                     <th>Harga</th>
+                    <th>Barcode</th>
                     <th>Tanggal</th>
                     <th>Aksi</th>
                 </tr>
@@ -47,6 +48,10 @@ $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
                     <td><?= $barang["jumlah"] ?></td>
                     <!-- format rupiah -->
                     <td>Rp<?= number_format($barang["harga"],0,',','.')  ?></td>
+                    <!-- barcoode -->
+                     <td class="text-center">
+                        <img src="barcode.php?codetype=Code128&size=30&text=<?= $barang['barcode']; ?>&print=true" alt="barcode">
+                     </td>
                     <!-- format tanggal indoenesia -->
                     <td><?= date("d/m/Y | H:i:s", strtotime($barang["tanggal"])); ?></td>
                     <td width="15%" class="text-center">

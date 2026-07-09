@@ -9,6 +9,13 @@
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
+<!-- load cdn ckeditor -->
+<script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('alamat');
+</script>
+
 <script>
     new DataTable('#example');
 </script>

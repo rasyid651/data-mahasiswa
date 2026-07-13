@@ -28,7 +28,7 @@ include 'config/app.php';
   <!-- JQVMap -->
   <link rel="stylesheet" href="assets-template/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="assets-template/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="assets-template/dist/css/adminlte.min.css">  
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="assets-template/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Daterange picker -->
@@ -221,25 +221,31 @@ include 'config/app.php';
                with font-awesome or any other icon font library -->
             <li class="nav-header">Daftar Menu</li>
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="index.php" class="nav-link">
                     <i class="nav-icon fas fa-box"></i>
                     <p>Data Barang</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="mahasiswa.php" class="nav-link">
                     <i class="nav-icon fas fa-user-graduate"></i>
                     <p>Data Mahasiswa</p>
                 </a>
             </li>
+                        <li class="nav-item">
+                <a href="akun.php" class="nav-link">
+                    <i class="nav-icon fas fa-box"></i>
+                    <p>Data Pegawai (Realtime)</p>
+                </a>
+            </li>
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="akun.php" class="nav-link">
                     <i class="nav-icon fas fa-user"></i>
                     <p>Data Akun</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="logout.php" class="nav-link">
                     <i class="nav-icon fas fa-sign-out-alt"></i>
                     <p>Logout</p>
                 </a>

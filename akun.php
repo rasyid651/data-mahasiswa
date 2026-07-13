@@ -21,12 +21,12 @@ if (isset($_POST['tambah']) > 0) {
     if (create_akun($_POST) > 0) {
         echo "<script>
         alert('Berhasil menambahkan akun!');
-        document.location.href = 'crud-modal.php';
+        document.location.href = 'akun.php';
         </script>";
     } else {
         echo "<script>
-        alert('Gagal menambahkan akun!);
-        document.location.href = 'crud-modal.php';
+        alert('Gagal menambahkan akun!');
+        document.location.href = 'akun.php';
         </script>";
     }
 }
@@ -35,17 +35,17 @@ if (isset($_POST['edit']) > 0) {
     if (update_akun($_POST) > 0) {
         echo "<script>
         alert('Berhasil mengedit akun!');
-        document.location.href = 'crud-modal.php';
+        document.location.href = 'akun.php';
         </script>";
     } else {
         echo "<script>
-        alert('Gagal mengedit akun!);
-        document.location.href = 'crud-modal.php';
+        alert('Gagal mengedit akun!');
+        document.location.href = 'akun.php';
         </script>";
     }
 }
 ?>
-
+<div class="content-wrapper">
 <div class="container mt-5">
     <h1><i class='fas fa-clipboard-list' style='font-size:36px'></i> Data Akun</h1>
     <hr>
@@ -228,7 +228,7 @@ if (isset($_POST['edit']) > 0) {
                                 </select>
                             </div>
                         <?php else : ?>
-                            <input type="hidden" name="level" value="<? $akun['level']; ?>">
+                            <input type="hidden" name="level" value="<?= $akun['level']; ?>">
                         <?php endif; ?>
                 </div>
                 <div class="modal-footer">

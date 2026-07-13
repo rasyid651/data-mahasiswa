@@ -22,7 +22,7 @@ include 'layout/header.php';
 $data_mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa DESC");
 ?>
 
-
+<div class="content-wrapper">
 <div class="container mt-5">
     <h1> <i class="fa fa-list-ul" style="font-size: 36px;"></i> Data Mahasiswa</h1>
     <hr>

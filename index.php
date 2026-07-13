@@ -111,7 +111,7 @@
             <!-- ./col -->
             </div>
             <!-- /.row -->
-             
+
             <!-- Main content -->
         <section class="content">
         <div class="container-fluid">
@@ -127,8 +127,8 @@
 
 
                 <div class="card-body">
-                <a href="tambah-barang.php" class="btn btn-primary mb-1"><i class="fas fa-plus"></i> Tambah Barang</a>  
-                <table id="example1" class="table table-bordered table-striped">
+                <a href="tambah-barang.php" class="btn btn-primary mb-1"><i class="fas fa-plus"></i> Tambah Barang</a> 
+                <table id="example" class="table table-bordered table-striped">
                         <thead>
                     <tr>
                         <th>No</th>

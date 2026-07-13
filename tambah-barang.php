@@ -26,7 +26,9 @@ if (isset($_POST['tambah'])) {
 }
 ?>
 
-<div class="container mt-5">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <div class="container mt-5">
     <h1>Tambah Data Barang</h1>
     <hr>
 
@@ -51,5 +53,6 @@ if (isset($_POST['tambah'])) {
         </button>
     </form>
 </div>
+  </div>
 
-<?php include 'layout/footer.php'; ?>
+  <?php include 'layout/footer.php'; ?>

@@ -233,7 +233,7 @@ include 'config/app.php';
                 </a>
             </li>
                         <li class="nav-item">
-                <a href="akun.php" class="nav-link">
+                <a href="pegawai.php" class="nav-link">
                     <i class="nav-icon fas fa-box"></i>
                     <p>Data Pegawai (Realtime)</p>
                 </a>

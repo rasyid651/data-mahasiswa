@@ -52,7 +52,7 @@ if (isset($_POST['edit']) > 0) {
 
     <!-- Button modal -->
     <?php if ($_SESSION['level'] == 1) : ?>
-        <button type="button" class="btn btn-primary mb-1" data-bs-toggle="modal" data-bs-target="#modalTambah">
+        <button type="button" class="btn btn-primary mb-1" data-toggle="modal" data-target="#modalTambah">
             Tambah
         </button>
     <?php endif; ?>
@@ -79,9 +79,10 @@ if (isset($_POST['edit']) > 0) {
                         <td><?= $akun['email'] ?></td>
                         <td>Password Dienkripsi</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-success mb-1" data-bs-toggle="modal" data-bs-target="#modalUbah<?= $akun['id_akun']; ?>">
+                            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>">
                                 Ubah
-                            </button><button type="button" class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#modalHapus<?= $akun['id_akun']; ?>">
+                            </button>
+                            <button type="button" class="btn btn-danger mb-1" data-toggle="modal" data-target="#modalHapus<?= $akun['id_akun']; ?>">
                                 Hapus
                             </button>
                         </td>
@@ -97,7 +98,7 @@ if (isset($_POST['edit']) > 0) {
                         <td><?= $akun['email'] ?></td>
                         <td>Password Dienkripsi</td>
                         <td class="text-center">
-                            <button type="button" class="btn btn-success mb-1" data-bs-toggle="modal" data-bs-target="#modalUbah<?= $akun['id_akun']; ?>">
+                            <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>">
                                 Ubah
                             </button>
                         </td>
@@ -152,7 +153,7 @@ if (isset($_POST['edit']) > 0) {
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
                 <button type="submit" name="tambah" class="btn btn-primary">Tambah</button>
             </div>
             </form>
@@ -173,7 +174,7 @@ if (isset($_POST['edit']) > 0) {
                     <p>Yakin ingin menghapus akun : <b><?= $akun['nama']; ?></b> ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                     <a href="hapus-akun.php?id_akun=<?= $akun['id_akun']; ?>" type="submit" name="tambah" class="btn btn-danger">Hapus</a>
                 </div>
             </div>
@@ -232,7 +233,7 @@ if (isset($_POST['edit']) > 0) {
                         <?php endif; ?>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kembali</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
                     <button type="submit" name="edit" class="btn btn-primary">Ubah</button>
                 </div>
             </div>

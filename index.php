@@ -21,13 +21,20 @@
     include 'layout/header.php';
 
     if (isset($_POST['filter'])){
-        $tgl_awal = strip_tags($_POST['tgl_awal'] f. "00:00:00");
-        $tgl_akhir = strip_tags($_POST['tgl_akhir'] . "23:59:59");
+        $tgl_awal = strip_tags($_POST['tgl_awal']) . " 00:00:00";
+        $tgl_akhir = strip_tags($_POST['tgl_akhir']) . " 23:59:59";
 
         // query filter data
         $data_barang = select("SELECT * FROM barang WHERE tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir' ORDER BY id_barang DESC");
     }else {
-        $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
+        // query tampil data dengan pagnition
+        $jumlahDataPerhalaman = 1;
+        $jumlahData = count(select("SELECT * FROM barang"));
+        $jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
+        $halamanAktif = (isset($_GET['halaman']) ? $_GET['halaman'] : 1);
+        $awalData = ($jumlahDataPerhalaman * $halamanAktif) - $jumlahDataPerhalaman;
+        
+        $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC LIMIT $awalData,$jumlahDataPerhalaman");
     }
     ?>
 
@@ -138,7 +145,7 @@
                 <button type="button" class="btn btn-success btn-sm px-3 py-2 mb-2" data-toggle="modal" data-target="#modalFilter"
                 ><i class="fas fa-search"></i> Filter Data</button>
 
-                <table id="example" class="table table-bordered table-striped">
+                <table class="table table-bordered table-striped">
                         <thead>
                     <tr>
                         <th>No</th>
@@ -173,6 +180,41 @@
                     </tr>
                     <?php endforeach; ?>
                     </table>
+
+                    <div class="mt-2 justify-content-end d-flex">
+                    <ul class="pagination">
+                        <?php if ($halamanAktif > 1) : ?>
+                        <li class="page-item">
+                        <a class="page-link" href="?halaman=<?= $halamanAktif - 1 ?>" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                        </li>
+                        <?php endif; ?>
+
+                        <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+                            <?php if ($i == $halamanAktif) : ?>
+                                <li class="page-item active"><a class="page-link" href="?halaman=<?= $i;?>">
+                                    <?= $i; ?>
+                                </a>
+                                </li>
+                                <?php else : ?>
+                                    <li class="page-item"><a class="page-link" href="?halaman=<?= $i;?>">
+                                        <?= $i; ?>
+                                    </a>
+                                    </li>
+                                <?php endif; ?>
+                                <?php endfor; ?>
+
+                                <?php if ($halamanAktif < $jumlahHalaman) : ?>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="?halaman=<?= $halamanAktif + 1?>" aria-label="Next">
+                                            <span aria-hidden="true">&raquo;</span>
+                                        </a>
+                                </li>
+                                <?php endif; ?>
+                    </ul>
+                    </div>
                 </div>
                 <!-- /.card-body -->
                 </div>
@@ -190,7 +232,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fas-search"></i>Filtar Data</h5>
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-search"></i>Filtar Data</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -209,7 +251,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-success btn-sm" name="filter">Tambah</button>
+                <button type="submit" class="btn btn-success btn-sm" name="filter">Cari Tanggal</button>
             </div>
 
             </form>

@@ -28,7 +28,7 @@
         $data_barang = select("SELECT * FROM barang WHERE tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir' ORDER BY id_barang DESC");
     }else {
         // query tampil data dengan pagnition
-        $jumlahDataPerhalaman = 1;
+        $jumlahDataPerhalaman = 3;
         $jumlahData = count(select("SELECT * FROM barang"));
         $jumlahHalaman = ceil($jumlahData / $jumlahDataPerhalaman);
         $halamanAktif = (isset($_GET['halaman']) ? $_GET['halaman'] : 1);
@@ -206,7 +206,6 @@
                                 <?php endfor; ?>
 
                                 <?php if ($halamanAktif < $jumlahHalaman) : ?>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
                                     <li class="page-item">
                                         <a class="page-link" href="?halaman=<?= $halamanAktif + 1?>" aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>

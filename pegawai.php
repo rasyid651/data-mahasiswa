@@ -28,7 +28,7 @@ $data_pegawai = select("SELECT * FROM pegawai ORDER BY id_pegawai DESC");
     <hr>
     
 
-    <table id="example" class="table table-bordered table-striped">
+    <table  class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>No</th>
@@ -37,17 +37,17 @@ $data_pegawai = select("SELECT * FROM pegawai ORDER BY id_pegawai DESC");
                 <th>Email</th>
                 <th>Telepon</th>
                 <th>Alamat</th>
-                <th>Aksi</th>
             </tr>
         </thead>
-        <tbody id="live_data">
+        <tbody id="live-data">
         </tbody>
     </table>
 </div>
 
 <script>
-    $('document').ready(function(){
-        getPegawai();
+   $(document).ready(function () {
+    getPegawai();
+    setInterval(getPegawai, 2000);
     });
 
     function getPegawai(){

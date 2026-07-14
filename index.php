@@ -20,7 +20,15 @@
     $title = "Daftar Barang";
     include 'layout/header.php';
 
-    $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
+    if (isset($_POST['filter'])){
+        $tgl_awal = strip_tags($_POST['tgl_awal'] f. "00:00:00");
+        $tgl_akhir = strip_tags($_POST['tgl_akhir'] . "23:59:59");
+
+        // query filter data
+        $data_barang = select("SELECT * FROM barang WHERE tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir' ORDER BY id_barang DESC");
+    }else {
+        $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
+    }
     ?>
 
 
@@ -125,9 +133,11 @@
                 </div>
                 <!-- /.card-header -->
 
-
                 <div class="card-body">
-                <a href="tambah-barang.php" class="btn btn-primary mb-1"><i class="fas fa-plus"></i> Tambah Barang</a> 
+                <a href="tambah-barang.php" class="btn btn-primary mb-2"><i class="fas fa-plus"></i> Tambah Barang</a>
+                <button type="button" class="btn btn-success btn-sm px-3 py-2 mb-2" data-toggle="modal" data-target="#modalFilter"
+                ><i class="fas fa-search"></i> Filter Data</button>
+
                 <table id="example" class="table table-bordered table-striped">
                         <thead>
                     <tr>
@@ -174,6 +184,37 @@
         <!-- /.container-fluid -->
         </section>
         
-        
+
+        <!-- Modal tambah -->
+<div class="modal fade" id="modalFilter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="exampleModalLabel"><i class="fa fas-search"></i>Filtar Data</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                
+                <div class="form-group">
+                    <label for="tgl_awal">Tanggal Awal</label>
+                    <input type="date" name="tgl_awal" id="tgl_awal" class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <label for="tgl_akhir">Tanggal Akhir</label>
+                    <input type="date" name="tgl_akhir" id="tgl_akhir" class="form-control">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-success btn-sm" name="filter">Tambah</button>
+            </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 
     <?php include 'layout/footer.php'; ?>

@@ -1,7 +1,7 @@
 <?php 
 include 'config/app.php';
+$data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +35,9 @@ include 'config/app.php';
   <link rel="stylesheet" href="assets-template/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="assets-template/plugins/summernote/summernote-bs4.min.css">
+
+  <!-- jQuery -->
+<script src="assets-template/plugins/jquery/jquery.min.js"></script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

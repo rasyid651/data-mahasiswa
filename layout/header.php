@@ -235,12 +235,21 @@ $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
                     <p>Data Mahasiswa</p>
                 </a>
             </li>
-                        <li class="nav-item">
+            
+            <li class="nav-item">
                 <a href="pegawai.php" class="nav-link">
                     <i class="nav-icon fas fa-box"></i>
                     <p>Data Pegawai (Realtime)</p>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="email.php" class="nav-link">
+                    <i class="nav-icon fas fa-envelope"></i>
+                    <p>Kirim Email (Realtime)</p>
+                </a>
+            </li>
+            
             <li class="nav-item">
                 <a href="akun.php" class="nav-link">
                     <i class="nav-icon fas fa-user"></i>

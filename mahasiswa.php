@@ -38,7 +38,6 @@ $data_mahasiswa = select("SELECT * FROM mahasiswa ORDER BY id_mahasiswa DESC");
                 <th>Prodi</th>
                 <th>Jenis Kelamin</th>
                 <th>Telepon</th>
-                <th>Email</th>
                 <th>Aksi</th>
             </tr>
         </thead>

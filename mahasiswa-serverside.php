@@ -1,7 +1,10 @@
 <?php
-include 'config/database.php';
+error_reporting(E_ALL);
+ini_set('display_errors',1);
+
+include 'config/koneksi.php';
  
-if ($_GET['action'] == "table_data") {
+if (isset($_GET['action']) && $_GET['action'] == "table_data") {
  
     $columns = array(
         0 => 'id_mahasiswa',
@@ -12,32 +15,57 @@ if ($_GET['action'] == "table_data") {
         5 => 'id_mahasiswa'
     );
  
-    $querycount = $db->query("SELECT count(id_mahasiswa) as jumlah FROM mahasiswa");
+    // menghitung jumlah data dari tabel mahasiswa
+    $querycount = $koneksi->query("SELECT count(id_mahasiswa) as jumlah FROM mahasiswa");
     $datacount = $querycount->fetch_array();
  
     $totalData = $datacount['jumlah'];
  
     $totalFiltered = $totalData;
- 
-    $limit = $_POST['length'];
-    $start = $_POST['start'];
-    $order = $columns[$_POST['order']['0']['column']];
-    $dir = $_POST['order']['0']['dir'];
- 
+    
+    $limit = isset($_POST['length']) ? $_POST['length'] : 10;
+    $start = isset($_POST['start']) ? $_POST['start'] : 0;
+    $order = $columns[$_POST['order'][0]['column'] ?? 0];
+    $dir   = $_POST['order'][0]['dir'] ?? 'DESC';
     if (empty($_POST['search']['value'])) {
-        $query = $db->query("SELECT id_mahasiswa,nama,prodi,jk,telepon FROM mahasiswa ORDER BY $order $dir LIMIT $limit OFFSET $start");
+        $query = $koneksi->query("SELECT id_mahasiswa,nama,prodi,jk,telepon FROM mahasiswa ORDER BY $order $dir LIMIT $limit OFFSET $start");
  
     } else {
         $search = $_POST['search']['value'];
-        $query = $db->query("SELECT id_mahasiswa,nama,prodi,jk,telepon FROM mahasiswa WHERE nama LIKE '%$search%' OR telepon LIKE '%$search%' ORDER BY $order $dir LIMIT $limit OFFSET $start");
+        $query = $koneksi->query("SELECT id_mahasiswa,nama,prodi,jk,telepon FROM mahasiswa WHERE nama LIKE '%$search%' OR telepon LIKE '%$search%' ORDER BY $order $dir LIMIT $limit OFFSET $start");
  
-        $querycount = $db->query("SELECT count(id_mahasiswa) as jumlah FROM mahasiswa WHERE nama LIKE '%$search%' OR telepon LIKE '%$search%'");
+        $querycount = $koneksi->query("SELECT count(id_mahasiswa) as jumlah FROM mahasiswa WHERE nama LIKE '%$search%' OR telepon LIKE '%$search%'");
  
         $datacount = $querycount->fetch_array();
         $totalFiltered = $datacount['jumlah'];
     }
  
     $data = array();
+
+    if (!empty($query)) {
+        $no = $start + 1;
+        while ($value = $query -> fetch_array()){
+            $nestedData['no'] = $no;
+            $nestedData['nama'] = $value['nama'];
+            $nestedData['prodi'] = $value['prodi'];
+            $nestedData['jk'] = $value['jk'];
+            $nestedData['telepon'] = $value['telepon'];
+            $nestedData['aksi'] = '<div width="20%" class="text-center">
+                        <a href="detail-mahasiswa.php?id_mahasiswa='.$value['id_mahasiswa'].'" class="btn btn-secondary btn-sm">
+                        <i class="fas fa-eye"></i> Detail</a>
+
+                        <a href="ubah-mahasiswa.php?id_mahasiswa='.$value['id_mahasiswa'].'" class="btn btn-success btn-sm">
+                        <i class="fas fa-edit"></i> Ubah</a>
+                        
+                        <a href="hapus-mahasiswa.php?id_mahasiswa='.$value['id_mahasiswa'].'" class="btn btn-danger btn-sm"
+                            onclick="return confirm(\'Yakin ingin menghapus barang?\')">
+                            <i class="fas fa-trash-alt"></i> Hapus</a>
+                        </div>';
+            $data[] = $nestedData;
+            $no++;
+        }
+    }
+
     $json_data = [
         "draw"            => intval($_POST['draw']),
         "recordsTotal"    => intval($totalData),
@@ -49,21 +77,3 @@ if ($_GET['action'] == "table_data") {
 }
 ?>
 
-  <?php $no = 1; ?>
-            <?php foreach ($data_mahasiswa as $mahasiswa) : ?>
-                <tr>
-                    <td><?= $no++; ?></td>
-                    <td><?= $mahasiswa["nama"] ?></td>
-                    <td><?= $mahasiswa["prodi"] ?></td>
-                    <td><?= $mahasiswa["jk"] ?></td>
-                    <td><?= $mahasiswa["telepon"] ?></td>
-                    <td><?= $mahasiswa["email"] ?></td>
-
-                    <td width="15%" class="text-center">
-                        <a href="detail-mahasiswa.php?id_mahasiswa=<?= $mahasiswa['id_mahasiswa']; ?>" class="btn btn-secondary btn-sm">Detail</a>
-                        <a href="ubah-mahasiswa.php?id_mahasiswa=<?= $mahasiswa['id_mahasiswa']; ?>" class="btn btn-success btn-sm">Ubah</a>
-                        <a href="hapus-mahasiswa.php?id_mahasiswa=<?= $mahasiswa['id_mahasiswa']; ?>" class="btn btn-danger btn-sm"
-                            onclick="return confirm('Yakin ingin menghapus barang?');">Hapus</a>
-                    </td>
-                </tr>
-   <?php endforeach; ?>

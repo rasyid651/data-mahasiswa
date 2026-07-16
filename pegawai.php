@@ -23,7 +23,8 @@ $data_pegawai = select("SELECT * FROM pegawai ORDER BY id_pegawai DESC");
 ?>
 
 <div class="content-wrapper">
-<div class="container mt-5">
+<section class="content">
+<div class="container-fluid">
     <h1> <i class="fa fa-list-ul" style="font-size: 36px;"></i> Data Pegawai</h1>
     <hr>
     
@@ -42,6 +43,8 @@ $data_pegawai = select("SELECT * FROM pegawai ORDER BY id_pegawai DESC");
         <tbody id="live-data">
         </tbody>
     </table>
+</div>
+</section>
 </div>
 
 <script>

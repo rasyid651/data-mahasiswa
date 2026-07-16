@@ -46,7 +46,9 @@ if (isset($_POST['edit']) > 0) {
 }
 ?>
 <div class="content-wrapper">
-<div class="container mt-5">
+<section class="content">
+<div class="container-fluid">
+
     <h1><i class='fas fa-clipboard-list' style='font-size:36px'></i> Data Akun</h1>
     <hr>
 
@@ -107,6 +109,8 @@ if (isset($_POST['edit']) > 0) {
             <?php endif; ?>
         </tbody>
     </table>
+</div>
+</section>
 </div>
 
 <!-- Modal tambah -->

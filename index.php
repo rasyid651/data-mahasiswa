@@ -44,6 +44,7 @@
         <!-- Content Header (Page header) -->
         <div class="content-header">
         <div class="container-fluid">
+            
             <div class="row mb-2">
             <div class="col-sm-6">
                 <h1 class="m-0">Dashboard</h1>
@@ -128,12 +129,8 @@
             <!-- /.row -->
 
             <!-- Main content -->
-        <section class="content">
-        <div class="container-fluid">
             <div class="row">
             <div class="col-12">
-                <div class="card">
-
                 <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Data Barang</h3>
@@ -214,19 +211,22 @@
                                 <?php endif; ?>
                     </ul>
                     </div>
-                </div>
-                <!-- /.card-body -->
-                </div>
+                    </div>
                 <!-- /.card -->
             </div>
             <!-- /.col -->
-            </div>
         </div>
-        <!-- /.container-fluid -->
-        </section>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
         
+<?php include 'layout/footer.php'; ?>
 
-        <!-- Modal tambah -->
+ <!-- Modal tambah -->
 <div class="modal fade" id="modalFilter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -258,4 +258,4 @@
     </div>
 </div>
 
-    <?php include 'layout/footer.php'; ?>
+

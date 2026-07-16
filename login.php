@@ -2,36 +2,68 @@
 session_start();
 include 'config/app.php';
 
-// cek apakah tombol login telah di tekan
+// cek apakah tombol login telah ditekan
 if (isset($_POST['login'])) {
+
     $username = mysqli_real_escape_string($koneksi, $_POST['username']);
     $password = mysqli_real_escape_string($koneksi, $_POST['password']);
 
-    // cek usn
-    $result = mysqli_query($koneksi, "SELECT * FROM akun WHERE username = '$username' ");
+    // Secret Key
+    $secret_key = "6LfLE1YtAAAAANjSh-t5F9E_fQeqv5yWCjmsrYpY";
 
-    // jika telah mempunyai akun
-    if (mysqli_num_rows($result) == 1) {
-        // cek pw
-        $hasil = mysqli_fetch_assoc($result);
+    // Response dari recaptcha
+    $captcha = $_POST['g-recaptcha-response'];
 
-        // code set session
-        if (password_verify($password, $hasil['password'])) {
-            $_SESSION['login'] = true;
-            $_SESSION['id_akun'] = $hasil['id_akun'];
-            $_SESSION['nama'] = $hasil['nama'];
-            $_SESSION['username'] = $hasil['username'];
-            $_SESSION['email'] = $hasil['email'];
-            $_SESSION['level'] = $hasil['level'];
-            header("Location: index.php");
-            exit;
+    // Verifikasi recaptcha
+    $verifikasi = file_get_contents(
+        "https://www.google.com/recaptcha/api/siteverify?secret=$secret_key&response=$captcha"
+    );
+
+    $response = json_decode($verifikasi);
+
+    // Jika captcha gagal
+    if (!$response->success) {
+
+        $errorRecaptcha = true;
+
+    } else {
+
+        // Cek username
+        $result = mysqli_query($koneksi,
+            "SELECT * FROM akun WHERE username='$username'"
+        );
+
+        if (mysqli_num_rows($result) == 1) {
+
+            $hasil = mysqli_fetch_assoc($result);
+
+            if (password_verify($password, $hasil['password'])) {
+
+                $_SESSION['login'] = true;
+                $_SESSION['id_akun'] = $hasil['id_akun'];
+                $_SESSION['nama'] = $hasil['nama'];
+                $_SESSION['username'] = $hasil['username'];
+                $_SESSION['email'] = $hasil['email'];
+                $_SESSION['level'] = $hasil['level'];
+
+                header("Location:index.php");
+                exit;
+
+            } else {
+
+                $error = true;
+
+            }
+
+        } else {
+
+            $error = true;
+
         }
+
     }
-    // jika blm punya akun
-    $error = true;
+
 }
-
-
 ?>
 
 <!doctype html>
@@ -84,8 +116,14 @@ if (isset($_POST['login'])) {
             <h1 class="h3 mb-3 fw-normal">Admin Login</h1>
 
             <?php if (isset($error)) : ?>
-                <div class="alert alert-danger">
+                <div class="alert alert-danger text-center">
                     <b>Username/Password Salah</b>
+                </div>
+            <?php endif; ?>
+
+            <?php if (isset($errorRecaptcha)) : ?>
+                <div class="alert alert-danger text-center">
+                    <b>Recaptcha tidak valid</b>
                 </div>
             <?php endif; ?>
 
@@ -99,11 +137,22 @@ if (isset($_POST['login'])) {
                 <label for="floatingPassword">Password</label>
             </div>
 
+            <div class="mb-3">
+                <div class="g-recaptcha" data-sitekey="6LfLE1YtAAAAAKuhDNDRNNx2cXJoWnhiQLR0-V7W"></div>
+            </div>
+
             <button class="w-100 btn btn-lg btn-primary" name="login" type="submit">Login</button>
             <p class="mt-5 mb-3 text-muted">&copy; 2026 acidd</p>
         </form>
     </main>
-
+    
+<!-- jQuery -->
+<script src="assets-template/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4  -->
+<script src="assets-template/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="assets-template/dist/js/adminlte.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
 
 </body>
 

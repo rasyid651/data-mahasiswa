@@ -1,6 +1,6 @@
 <?php 
 include 'config/app.php';
-$data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
+// $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +38,9 @@ $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
 
   <!-- jQuery -->
 <script src="assets-template/plugins/jquery/jquery.min.js"></script>
+
 </head>
+
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 

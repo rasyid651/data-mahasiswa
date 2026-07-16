@@ -8,14 +8,15 @@ require 'vendor/autoload.php';
 
 // create object phpmailer
 $email = new PHPMailer(true);
+
 // Server Settings
-$email->SMTPDebug = 0;
-$email->isSMTP();
-$email->Host = 'smtp.gmail.com';
-$email->SMTPAuth = true;
-$email->Username = 'muhammadalrasyid789@gmail.com';
-$email->Password = 'fzyvpzfvxmojoali';
-$email->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+$email->SMTPDebug = 0; //Enable verbose debug output
+$email->isSMTP(); //Send using SMTP
+$email->Host = 'smtp.gmail.com'; //Set the SMTP server to send through
+$email->SMTPAuth = true; //Enable SMTP authentication
+$email->Username = 'muhammadalrasyid789@gmail.com'; //SMTP username
+$email->Password = 'fzyvpzfvxmojoali'; //SMTP password
+$email->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
 $email->Port = 465;
 
 if (isset($_POST['kirim'])) {

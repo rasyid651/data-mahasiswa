@@ -13,8 +13,9 @@ include 'layout/header.php';
 ?>
 
   <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <div class="container mt-5">
+<div class="content-wrapper">
+<section class="content">
+<div class="container-fluid">
     <h1><i class="fas fa-envelope"></i> Kirim Email</h1>
     <hr>
 
@@ -39,6 +40,8 @@ include 'layout/header.php';
         </button>
     </form>
 </div>
-  </div>
+</section>
+</div>
+
 
   <?php include 'layout/footer.php'; ?>

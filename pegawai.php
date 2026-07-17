@@ -22,7 +22,7 @@ include 'layout/header.php';
 $data_pegawai = select("SELECT * FROM pegawai ORDER BY id_pegawai DESC");
 ?>
 
-<div class="content-wrapper">
+<div class="content-wrapper pt-2">
 <section class="content">
 <div class="container-fluid">
     <h1> <i class="fa fa-list-ul" style="font-size: 36px;"></i> Data Pegawai</h1>

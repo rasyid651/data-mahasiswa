@@ -13,7 +13,7 @@ include 'layout/header.php';
 ?>
 
   <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="content-wrapper pt-2">
 <section class="content">
 <div class="container-fluid">
     <h1><i class="fas fa-envelope"></i> Kirim Email</h1>

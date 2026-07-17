@@ -18,7 +18,9 @@ $id_mahasiswa =  (int)$_GET['id_mahasiswa'];
 $mahasiswa = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa")[0];
 ?>
 
-<div class="container mt-5">
+<div class="content-wrapper pt-2">
+<section class="content">
+<div class="container-fluid pb-5">
     <h1>Data <?= $mahasiswa['nama'] ?></h1>
     <hr>
     <table class="table table-bordered table-striped">
@@ -57,6 +59,8 @@ $mahasiswa = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa"
         </tr>
     </table>
     <a href="mahasiswa.php" class="btn btn-secondary btn-sm" style="float: right;">Kembali</a>
+</div>
+</section>
 </div>
 
 <?php include 'layout/footer.php' ?>

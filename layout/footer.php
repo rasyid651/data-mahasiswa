@@ -66,6 +66,8 @@
   <script src="assets-template/dist/js/demo.js"></script>
   <!-- Page specific script -->
 
+
+
   <!-- datatable client side -->
   <script>
       $(function () {

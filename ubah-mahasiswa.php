@@ -32,7 +32,9 @@ $mahasiswa = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa"
 
 ?>
 
-<div class="container mt-5">
+<div class="content-wrapper pt-2">
+<section class="content">
+<div class="container-fluid">
     <h1>Ubah Mahasiswa</h1>
     <hr>
 
@@ -92,9 +94,20 @@ $mahasiswa = select("SELECT * FROM mahasiswa WHERE id_mahasiswa = $id_mahasiswa"
 
             <img src="assets/img/<?= $mahasiswa['foto'] ?>" class="img-thumbnail img-preview mt-2" alt="" width="100px">
         </div>
-        <input type="submit" class="btn btn-primary" style="float: right;" value="Simpan" name="update">
-        <a href="mahasiswa.php" class="btn btn-secondary me-2" style="float: right;">Kembali</a>
+        <div class="d-flex justify-content-end mt-4 mb-2">
+        <a href="mahasiswa.php" class="btn btn-secondary mr-2">
+        Kembali
+        </a>
+
+    <input
+        type="submit"
+        class="btn btn-primary"
+        value="Simpan"
+        name="update">
+    </div>
     </form>
+</div>
+</section>
 </div>
 
 <script>

@@ -1,6 +1,9 @@
 <?php 
 include 'config/app.php';
 // $data_barang = select("SELECT * FROM barang ORDER BY id_barang DESC");
+
+// Mengetahui nama file yang sedang dibuka 
+$halaman = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>
@@ -38,10 +41,11 @@ include 'config/app.php';
 
   <!-- jQuery -->
 <script src="assets-template/plugins/jquery/jquery.min.js"></script>
+<link rel="stylesheet" href="style.css">
 
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -225,45 +229,47 @@ include 'config/app.php';
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-header">Daftar Menu</li>
-            <li class="nav-item">
-                <a href="index.php" class="nav-link">
-                    <i class="nav-icon fas fa-box"></i>
-                    <p>Data Barang</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="mahasiswa.php" class="nav-link">
-                    <i class="nav-icon fas fa-user-graduate"></i>
-                    <p>Data Mahasiswa</p>
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a href="pegawai.php" class="nav-link">
-                    <i class="nav-icon fas fa-box"></i>
-                    <p>Data Pegawai (Realtime)</p>
-                </a>
-            </li>
+<li class="nav-item">
+    <a href="index.php" class="nav-link <?= ($halaman == 'index.php') ? 'active' : ''; ?>">
+        <i class="nav-icon fas fa-box"></i>
+        <p>Data Barang</p>
+    </a>
+</li>
 
-            <li class="nav-item">
-                <a href="email.php" class="nav-link">
-                    <i class="nav-icon fas fa-envelope"></i>
-                    <p>Kirim Email (Realtime)</p>
-                </a>
-            </li>
-            
-            <li class="nav-item">
-                <a href="akun.php" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i>
-                    <p>Data Akun</p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="logout.php" class="nav-link">
-                    <i class="nav-icon fas fa-sign-out-alt"></i>
-                    <p>Logout</p>
-                </a>
-            </li>
+<li class="nav-item">
+    <a href="mahasiswa.php" class="nav-link <?= ($halaman == 'mahasiswa.php') ? 'active' : ''; ?>">
+        <i class="nav-icon fas fa-user-graduate"></i>
+        <p>Data Mahasiswa</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="pegawai.php" class="nav-link <?= ($halaman == 'pegawai.php') ? 'active' : ''; ?>">
+        <i class="nav-icon fas fa-users"></i>
+        <p>Data Pegawai</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="email.php" class="nav-link <?= ($halaman == 'email.php') ? 'active' : ''; ?>">
+        <i class="nav-icon fas fa-envelope"></i>
+        <p>Kirim Email</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="akun.php" class="nav-link <?= ($halaman == 'akun.php') ? 'active' : ''; ?>">
+        <i class="nav-icon fas fa-user"></i>
+        <p>Data Akun</p>
+    </a>
+</li>
+
+<li class="nav-item">
+    <a href="logout.php" class="nav-link bg-danger">
+        <i class="nav-icon fas fa-sign-out-alt"></i>
+        <p>Logout</p>
+    </a>
+</li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

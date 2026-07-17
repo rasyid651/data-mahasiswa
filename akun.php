@@ -45,7 +45,7 @@ if (isset($_POST['edit']) > 0) {
     }
 }
 ?>
-<div class="content-wrapper">
+<div class="content-wrapper pt-2">
 <section class="content">
 <div class="container-fluid">
 
@@ -82,10 +82,10 @@ if (isset($_POST['edit']) > 0) {
                         <td>Password Dienkripsi</td>
                         <td class="text-center">
                             <button type="button" class="btn btn-success mb-1" data-toggle="modal" data-target="#modalUbah<?= $akun['id_akun']; ?>">
-                                Ubah
+                                <i class="fas fa-edit"></i> Ubah
                             </button>
                             <button type="button" class="btn btn-danger mb-1" data-toggle="modal" data-target="#modalHapus<?= $akun['id_akun']; ?>">
-                                Hapus
+                                <i class="fas fa-trash-alt"></i> Hapus
                             </button>
                         </td>
                     </tr>

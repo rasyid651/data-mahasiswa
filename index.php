@@ -20,6 +20,9 @@
     $title = "Daftar Barang";
     include 'layout/header.php';
 
+    // Data untuk grafik (selalu mengambil semua data)
+    $chart_barang = select("SELECT nama, harga FROM barang ORDER BY id_barang ASC");
+
     if (isset($_POST['filter'])){
         $tgl_awal = strip_tags($_POST['tgl_awal']) . " 00:00:00";
         $tgl_akhir = strip_tags($_POST['tgl_akhir']) . " 23:59:59";
@@ -38,9 +41,17 @@
     }
     ?>
 
+<?php
+    $namaBarang = [];
+    $hargaBarang = [];
 
+    foreach ($chart_barang as $row) {
+        $namaBarang[] = $row['nama'];
+        $hargaBarang[] = $row['harga'];
+    }
+?>
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper pt-2">
         <!-- Content Header (Page header) -->
         <div class="content-header">
         <div class="container-fluid">
@@ -128,6 +139,24 @@
             </div>
             <!-- /.row -->
 
+    <div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <h3 class="card-title">
+                    Grafik Harga Barang
+                </h3>
+            </div>
+
+                <div class="card-body">
+                    <div class="chart-container">
+                        <canvas id="hargaChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
             <!-- Main content -->
             <div class="row">
             <div class="col-12">
@@ -142,6 +171,7 @@
                 <button type="button" class="btn btn-success btn-sm px-3 py-2 mb-2" data-toggle="modal" data-target="#modalFilter"
                 ><i class="fas fa-search"></i> Filter Data</button>
 
+                <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                         <thead>
                     <tr>
@@ -170,13 +200,14 @@
                         <!-- format tanggal indoenesia -->
                         <td><?= date("d/m/Y | H:i:s", strtotime($barang["tanggal"])); ?></td>
                         <td width="15%" class="text-center">
-                            <a href="ubah-barang.php?id_barang=<?= $barang['id_barang']; ?>" class="btn btn-primary">Ubah</a>
+                            <a href="ubah-barang.php?id_barang=<?= $barang['id_barang']; ?>" class="btn btn-success"><i class="fas fa-edit"></i> Ubah</a>
                             <a href="hapus-barang.php?id_barang=<?= $barang['id_barang']; ?>" class="btn btn-danger"
-                            onclick="return confirm('Yakin ingin menghapus barang?');">Hapus</a>
+                            onclick="return confirm('Yakin ingin menghapus barang?');"><i class="fas fa-trash-alt"></i> Hapus</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
                     </table>
+                    </div>
 
                     <div class="mt-2 justify-content-end d-flex">
                     <ul class="pagination">
@@ -223,6 +254,138 @@
 <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+  
+<!-- Chart JS -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const ctx = document.getElementById('hargaChart');
+
+    if (!ctx) return;
+
+    const isMobile = window.innerWidth < 768;
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: <?= json_encode($namaBarang); ?>,
+            datasets: [{
+                label: 'Harga Barang',
+                data: <?= json_encode($hargaBarang); ?>,
+                backgroundColor: [
+                    '#007bff',
+                    '#28a745',
+                    '#ffc107',
+                    '#dc3545',
+                    '#17a2b8',
+                    '#6f42c1',
+                    '#fd7e14',
+                    '#20c997'
+                ],
+                borderRadius: 8,
+                borderSkipped: false,
+                barThickness: isMobile ? 24 : 40
+            }]
+        },
+
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+
+            layout: {
+                padding: {
+                    top: 10,
+                    bottom: 10,
+                    left: 10,
+                    right: 10
+                }
+            },
+
+            plugins: {
+                legend: {
+                    display: false
+                },
+
+                tooltip: {
+                    callbacks: {
+                        title: function(context) {
+                            return context[0].label;
+                        },
+                        label: function(context) {
+                            return 'Rp ' + context.raw.toLocaleString('id-ID');
+                        }
+                    }
+                }
+            },
+
+            scales: {
+
+                x: {
+                    grid: {
+                        display: false
+                    },
+
+                    ticks: {
+                        color: "#495057",
+                        autoSkip: true,
+                        maxTicksLimit: isMobile ? 4 : 10,
+
+                        maxRotation: 0,
+                        minRotation: 0,
+
+                        font: {
+                            size: isMobile ? 10 : 12
+                        },
+
+                        callback: function(value) {
+
+                            let label = this.getLabelForValue(value);
+
+                            if (isMobile && label.length > 10) {
+                                return label.substring(0, 10) + "...";
+                            }
+
+                            if (!isMobile && label.length > 15) {
+                                return label.substring(0, 15) + "...";
+                            }
+
+                            return label;
+                        }
+                    }
+                },
+
+                y: {
+
+                    beginAtZero: true,
+
+                    ticks: {
+
+                        color: "#495057",
+
+                        callback: function(value) {
+                            return "Rp " + value.toLocaleString("id-ID");
+                        },
+
+                        font: {
+                            size: isMobile ? 10 : 12
+                        }
+                    },
+
+                    grid: {
+                        color: "#e9ecef"
+                    }
+                }
+
+            }
+
+        }
+
+    });
+
+});
+</script>
         
 <?php include 'layout/footer.php'; ?>
 
@@ -257,5 +420,6 @@
         </div>
     </div>
 </div>
+
 
 

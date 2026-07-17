@@ -27,7 +27,9 @@ if (isset($_POST['tambah'])) {
 
 ?>
 
-<div class="container mt-5">
+<div class="content-wrapper pt-2">
+<section class="content">
+<div class="container-fluid">
     <h1>Tambah Data Mahasiswa</h1>
     <hr>
 
@@ -82,6 +84,8 @@ if (isset($_POST['tambah'])) {
             <i class="fa fa-plus" style="font-size:14px"></i> Tambah
         </button>
     </form>
+</div>
+</section>
 </div>
 
 <?php include 'layout/footer.php'; ?>

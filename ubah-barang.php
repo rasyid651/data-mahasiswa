@@ -31,7 +31,9 @@ $barang = select("SELECT * FROM barang WHERE id_barang = $id_barang")[0];
 
 ?>
 
-<div class="container mt-5">
+<div class="content-wrapper pt-2">
+<section class="content">
+<div class="container-fluid">
     <h1>Ubah Data Barang</h1>
     <hr>
 
@@ -57,6 +59,8 @@ $barang = select("SELECT * FROM barang WHERE id_barang = $id_barang")[0];
         </div>
         <input type="submit" class="btn btn-primary" style="float: right;" value="Simpan" name="update">
     </form>
+</div>
+</section>
 </div>
 
 <?php include 'layout/footer.php'; ?>

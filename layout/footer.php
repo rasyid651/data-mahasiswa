@@ -66,6 +66,18 @@
   <script src="assets-template/dist/js/demo.js"></script>
   <!-- Page specific script -->
 
+  
+<link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/48.3.0/ckeditor5.css">
+<!-- <script src="https://cdn.ckeditor.com/4.25.1-lts/standard/ckeditor.js"></script> -->
+<script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('alamat', {
+        filebrowserBrowseUrl: 'assets/ckfinder/ckfinder.html',
+        filebrowserImageBrowseUrl: 'assets/ckfinder/ckfinder.html?type=Images',
+        filebrowserUploadUrl: 'assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+        filebrowserImageUploadUrl: 'assets/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images'
+    });
+</script>
 
 
   <!-- datatable client side -->

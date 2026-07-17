@@ -261,29 +261,33 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-    const ctx = document.getElementById('hargaChart');
+    const canvas = document.getElementById("hargaChart");
 
-    if (!ctx) return;
+    if (!canvas) return;
 
     const isMobile = window.innerWidth < 768;
 
-    new Chart(ctx, {
-        type: 'bar',
+    new Chart(canvas, {
+        type: "bar",
+
         data: {
             labels: <?= json_encode($namaBarang); ?>,
+
             datasets: [{
-                label: 'Harga Barang',
+                label: "Harga Barang",
                 data: <?= json_encode($hargaBarang); ?>,
+
                 backgroundColor: [
-                    '#007bff',
-                    '#28a745',
-                    '#ffc107',
-                    '#dc3545',
-                    '#17a2b8',
-                    '#6f42c1',
-                    '#fd7e14',
-                    '#20c997'
+                    "#007bff",
+                    "#28a745",
+                    "#ffc107",
+                    "#dc3545",
+                    "#17a2b8",
+                    "#6f42c1",
+                    "#fd7e14",
+                    "#20c997"
                 ],
+
                 borderRadius: 8,
                 borderSkipped: false,
                 barThickness: isMobile ? 24 : 40
@@ -291,91 +295,106 @@ document.addEventListener("DOMContentLoaded", function () {
         },
 
         options: {
+
             responsive: true,
             maintainAspectRatio: false,
 
             layout: {
-                padding: {
-                    top: 10,
-                    bottom: 10,
-                    left: 10,
-                    right: 10
-                }
+                padding: 15
             },
 
             plugins: {
+
                 legend: {
                     display: false
                 },
 
                 tooltip: {
+
                     callbacks: {
-                        title: function(context) {
+
+                        title: function(context){
                             return context[0].label;
                         },
-                        label: function(context) {
-                            return 'Rp ' + context.raw.toLocaleString('id-ID');
+
+                        label: function(context){
+                            return "Rp " + context.raw.toLocaleString("id-ID");
                         }
+
                     }
+
                 }
+
             },
 
             scales: {
 
                 x: {
+
                     grid: {
                         display: false
                     },
 
                     ticks: {
-                        color: "#495057",
+
                         autoSkip: true,
-                        maxTicksLimit: isMobile ? 4 : 10,
+                        maxTicksLimit: isMobile ? 5 : 10,
 
                         maxRotation: 0,
                         minRotation: 0,
+
+                        color: "#495057",
 
                         font: {
                             size: isMobile ? 10 : 12
                         },
 
-                        callback: function(value) {
+                        callback: function(value){
 
                             let label = this.getLabelForValue(value);
 
-                            if (isMobile && label.length > 10) {
-                                return label.substring(0, 10) + "...";
+                            if(isMobile && label.length > 10){
+                                return label.substring(0,10) + "...";
                             }
 
-                            if (!isMobile && label.length > 15) {
-                                return label.substring(0, 15) + "...";
+                            if(!isMobile && label.length > 15){
+                                return label.substring(0,15) + "...";
                             }
 
                             return label;
+
                         }
+
                     }
+
                 },
 
                 y: {
 
                     beginAtZero: true,
 
+                    suggestedMax: 20000000,
+
                     ticks: {
+
+                        stepSize: 5000000,
 
                         color: "#495057",
 
-                        callback: function(value) {
-                            return "Rp " + value.toLocaleString("id-ID");
-                        },
-
                         font: {
                             size: isMobile ? 10 : 12
+                        },
+
+                        callback: function(value){
+                            return value.toLocaleString("id-ID");
                         }
+
                     },
 
                     grid: {
                         color: "#e9ecef"
                     }
+
                 }
 
             }
